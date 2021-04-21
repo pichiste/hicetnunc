@@ -14,7 +14,7 @@
   {
     "uid": "thefen",
     "name": "The FEN",
-    "endpoint": "https://raw.githubusercontent.com/joanielemercier/The_fen/main/thefen.json",
+    "endpoint": "https://dl.dropboxusercontent.com/s/owz0tthki0rgret/thefen.json",
     "thumbnail": "34413"
   }
 ]
