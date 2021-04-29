@@ -31,5 +31,13 @@
     padding-top: 10px;
     color: var(--text-color);
     font-size: 12px;
+
+    .sold {
+      background: red;
+      color: white;
+      font-weight: bold;
+      padding: 2.5px 5px;
+      margin: 2.5px 0;
+    }
   }
 }

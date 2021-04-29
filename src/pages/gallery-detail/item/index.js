@@ -37,8 +37,17 @@ export const Item = ({ objkt, onClick, minimal }) => {
   useEffect(() => {
     GetOBJKTStubbornly({ id: objkt })
       .then(async (e) => {
-        const { token_info } = e
+        const { token_info, owners } = e
         const { mimeType, uri } = token_info.formats[0]
+
+        const creatorId = token_info.creators[0]
+        const nullId = 'KT1Hkg5qeNhfwpKW4fXvq7HGZB9z2EnmCCA9'
+
+        const otherOwners = Object.entries(owners)
+          .filter((e) => e[0] !== creatorId && e[0] !== nullId)
+          .map((e) => parseInt(e[1]))
+
+        const sold = otherOwners.reduce((a, b) => a + b, 0)
 
         let price = ''
         try {
@@ -69,6 +78,7 @@ export const Item = ({ objkt, onClick, minimal }) => {
           metadata: e,
           price,
           edition,
+          sold,
         })
       })
       .catch((e) => console.log('error loading', objkt))
@@ -97,6 +107,9 @@ export const Item = ({ objkt, onClick, minimal }) => {
                 {minimal !== true && (
                   <div className={styles.info}>
                     {data.edition !== false && <p>{data.edition}</p>}
+                    {!!data.sold && (
+                      <p className={styles.sold}>SOLD {data.sold}</p>
+                    )}
                     <p
                       style={{
                         opacity: data.price === nfs ? 0.5 : 1,
