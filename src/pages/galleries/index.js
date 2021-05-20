@@ -14,7 +14,7 @@ const sortByThumbnailTokenId = (a, b) => {
   return ia < ib ? 1 : -1
 }
 export const Galleries = () => {
-  const [loading, setLoading] = useState(true)
+  /* const [loading, setLoading] = useState(true) */
   const [data, setData] = useState(false)
 
   useEffect(() => {
@@ -30,10 +30,10 @@ export const Galleries = () => {
             g.push(Object.assign({}, found, e))
             c++
 
-            if (c === 3) {
+            if (c === galleries.length) {
               g.sort(sortByThumbnailTokenId)
               setData(g)
-              setLoading(false)
+              /* setLoading(false) */
             }
           })
         })
@@ -45,13 +45,6 @@ export const Galleries = () => {
   }, [])
   return (
     <Page title="Galleries">
-      {loading ? (
-        <Container>
-          <Padding>
-            <Loading />
-          </Padding>
-        </Container>
-      ) : (
         <Container xlarge>
           <Padding>
             <ResponsiveMasonry>
@@ -81,7 +74,6 @@ export const Galleries = () => {
             </ResponsiveMasonry>
           </Padding>
         </Container>
-      )}
     </Page>
   )
 }
